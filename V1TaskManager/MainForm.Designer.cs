@@ -80,7 +80,7 @@ namespace V1TaskManager
 			this.menuMyStuffRefresh.Name = "menuMyStuffRefresh";
 			this.menuMyStuffRefresh.Size = new System.Drawing.Size(152, 22);
 			this.menuMyStuffRefresh.Text = "Refresh";
-			this.menuMyStuffRefresh.Click += new System.EventHandler(this.menuMyStuffRefresh_Click);
+			this.menuMyStuffRefresh.Click += new System.EventHandler(this.MenuMyStuffRefreshClick);
 			// 
 			// toolStripSeparator2
 			// 
@@ -98,7 +98,7 @@ namespace V1TaskManager
 			this.menuConfig.Name = "menuConfig";
 			this.menuConfig.Size = new System.Drawing.Size(152, 22);
 			this.menuConfig.Text = "Configuration";
-			this.menuConfig.Click += new System.EventHandler(this.menuConfig_Click);
+			this.menuConfig.Click += new System.EventHandler(this.MenuConfigClick);
 			// 
 			// toolStripSeparator3
 			// 
@@ -110,7 +110,7 @@ namespace V1TaskManager
 			this.menuExit.Name = "menuExit";
 			this.menuExit.Size = new System.Drawing.Size(152, 22);
 			this.menuExit.Text = "Exit";
-			this.menuExit.Click += new System.EventHandler(this.menuExit_Click);
+			this.menuExit.Click += new System.EventHandler(this.MenuExitClick);
 			// 
 			// iconList
 			// 
@@ -150,7 +150,7 @@ namespace V1TaskManager
 			this.menuOtherStuffRefresh.Name = "menuOtherStuffRefresh";
 			this.menuOtherStuffRefresh.Size = new System.Drawing.Size(152, 22);
 			this.menuOtherStuffRefresh.Text = "Refresh";
-			this.menuOtherStuffRefresh.Click += new System.EventHandler(this.menuOtherStuffRefresh_Click);
+			this.menuOtherStuffRefresh.Click += new System.EventHandler(this.MenuOtherStuffRefreshClick);
 			// 
 			// toolStripSeparator4
 			// 

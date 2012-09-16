@@ -98,7 +98,7 @@ namespace V1TaskManager
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancelClick);
             // 
             // btnOK
             // 
@@ -109,7 +109,7 @@ namespace V1TaskManager
             this.btnOK.TabIndex = 4;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            this.btnOK.Click += new System.EventHandler(this.BtnOkClick);
             // 
             // lblIntegratedUsername
             // 
@@ -158,7 +158,7 @@ namespace V1TaskManager
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Configuration";
-            this.Load += new System.EventHandler(this.ConfigForm_Load);
+            this.Load += new System.EventHandler(this.ConfigFormLoad);
             this.ResumeLayout(false);
             this.PerformLayout();
 

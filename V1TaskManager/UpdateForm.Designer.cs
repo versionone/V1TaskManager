@@ -147,7 +147,7 @@ namespace V1TaskManager
 			this.btnOK.TabIndex = 1;
 			this.btnOK.Text = "OK";
 			this.btnOK.UseVisualStyleBackColor = true;
-			this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+			this.btnOK.Click += new System.EventHandler(this.BtnOkClick);
 			// 
 			// btnClose
 			// 
@@ -159,7 +159,7 @@ namespace V1TaskManager
 			this.btnClose.TabIndex = 2;
 			this.btnClose.Text = "OK && Close";
 			this.btnClose.UseVisualStyleBackColor = true;
-			this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+			this.btnClose.Click += new System.EventHandler(this.BtnCloseClick);
 			// 
 			// UpdateForm
 			// 
