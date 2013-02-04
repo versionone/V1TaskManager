@@ -22,7 +22,25 @@ export WORKSPACE=`pwd`
 function winpath() {
   # Convert gitbash style path '/c/Users/Big John/Development' to 'c:\Users\Big John\Development',
   # via dumb substitution. Handles drive letters; incurs process creation penalty for sed.
-  echo "$1" | sed -e 's|^/\(\w\)/|\1:\\|g;s|/|\\|g'
+  if [ -e /etc/bash.bashrc ] ; then
+    # Cygwin specific settings
+    echo "`cygpath -w $1`"
+  else
+    # Msysgit specific settings
+    echo "$1" | sed -e 's|^/\(\w\)/|\1:\\|g;s|/|\\|g'
+  fi
+}
+
+function bashpath() {
+  # Convert windows style path 'c:\Users\Big John\Development' to '/c/Users/Big John/Development'
+  # via dumb substitution. Handles drive letters; incurs process creation penalty for sed.
+  if [ -e /etc/bash.bashrc ] ; then
+    # Cygwin specific settings
+    echo "`cygpath $1`"
+  else
+    # Msysgit specific settings
+    echo "$1" | sed -e 's|\(\w\):|/\1|g;s|\\|/|g'
+  fi
 }
 
 function parentwith() {  # used to find $WORKSPACE, below.
@@ -58,7 +76,7 @@ done
 echo "Using $BUILDTOOLS_PATH for tools"
 
 if [ -z "$DOTNET_PATH" ]; then
-  for D in `cygpath -u "$SYSTEMROOT/Microsoft.NET/Framework/*"`; do
+  for D in `bashpath "$SYSTEMROOT\\Microsoft.NET\\Framework\\*"`; do
     if [ -d $D ]; then
       export DOTNET_PATH="$D"
     fi
@@ -87,7 +105,7 @@ fi
 
 if [ -z "$BUILD_NUMBER" ]; then
   # presume local workstation, use date-based build number
-  export BUILD_NUMBER=`date %H%M`  # hour + minute
+  export BUILD_NUMBER=`date +%H%M`  # hour + minute
 fi
 
 function update_nuget_deps() {
