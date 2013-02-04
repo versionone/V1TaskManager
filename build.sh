@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -ex
 
 #set -e
 
@@ -67,13 +67,17 @@ if [ -z "$WORKSPACE" ]; then
   export WORKSPACE=`parentwith .git`;
 fi
 
-TOOLSDIRS=". $WORKSPACE/GetBuildTools $WORKSPACE/v1_build_tools $WORKSPACE/../v1_build_tools $WORKSPACE/nuget_tools"
+#TOOLSDIRS=". $WORKSPACE/GetBuildTools $WORKSPACE/v1_build_tools $WORKSPACE/../v1_build_tools $WORKSPACE/nuget_tools"
+TOOLSDIRS="."
 for D in $TOOLSDIRS; do
-  if [ -d "$D" ]; then
-    export BUILDTOOLS_PATH="$D"
+  if [ -d "$D/bin" ]; then
+    export BUILDTOOLS_PATH="$D/bin"
   fi
 done
-echo "Using $BUILDTOOLS_PATH for tools"
+if [ ! $(which $BUILDTOOLS_PATH/NuGet.exe) ] && [ $(which $WORKSPACE/.nuget/NuGet.exe) ]; then
+  export BUILDTOOLS_PATH="$WORKSPACE/.nuget"
+fi
+echo "Using $BUILDTOOLS_PATH for NuGet"
 
 if [ -z "$DOTNET_PATH" ]; then
   for D in `bashpath "$SYSTEMROOT\\Microsoft.NET\\Framework\\*"`; do
@@ -84,7 +88,7 @@ if [ -z "$DOTNET_PATH" ]; then
 fi
 echo "Using $DOTNET_PATH for .NET"
 
-export PATH="$PATH:$BUILDTOOLS_PATH/bin:$DOTNET_PATH"
+export PATH="$PATH:$BUILDTOOLS_PATH:$DOTNET_PATH"
 
 if [ -z "$SIGNING_KEY_DIR" ]; then
   export SIGNING_KEY_DIR=`pwd`;
@@ -109,14 +113,14 @@ if [ -z "$BUILD_NUMBER" ]; then
 fi
 
 function update_nuget_deps() {
-  PKGSCONFIG="${1:-packages.config}"
-  if [ -f $PACKAGES_CONFIG ]
-  then
-    PKGSCONFIGW=`winpath "${PKGSCONFIG}"`
-    PKGSDIRW=`winpath "$WORKSPACE/packages"`
-    NuGet.exe install $PKGSCONFIGW -o $PKGSDIRW -Source $NUGET_FETCH_URL 
-    NuGet.exe update $SOLUTION_FILE -Verbose -Source $NUGET_FETCH_URL
-  fi
+  PKGSDIRW=`winpath "$WORKSPACE/packages"`
+  for D in $WORKSPACE/*; do
+    if [ -d $D ] && [ -f $D/packages.config ]; then
+      PKGSCONFIGW=`winpath "$D/packages.config"`
+      NuGet.exe install $PKGSCONFIGW -o $PKGSDIRW -Source $NUGET_FETCH_URL
+    fi
+  done
+  NuGet.exe update $SOLUTION_FILE -Verbose -Source $NUGET_FETCH_URL
 }
 
 
