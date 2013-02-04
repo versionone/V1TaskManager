@@ -57,8 +57,11 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="VersionOne.SDK.APIClient">
+      <HintPath>..\packages\VersionOne.SDK.APIClient.12.4.0.153\lib\net40\VersionOne.SDK.APIClient.dll</HintPath>
+    </Reference>
     <Reference Include="VersionOne.SDK.ObjectModel">
-      <HintPath>..\packages\VersionOne.SDK.ObjectModel.12.2.0.0\lib\net40\VersionOne.SDK.ObjectModel.dll</HintPath>
+      <HintPath>..\packages\VersionOne.SDK.ObjectModel.12.3.211.0\lib\net40\VersionOne.SDK.ObjectModel.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
