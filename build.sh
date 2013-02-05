@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash -e
 
 #set -e
 
@@ -165,6 +165,6 @@ update_nuget_deps
 
 # ---- Build solution using msbuild -------------------------------------------
 
-MSBuild.exe $SOLUTION_FILE /p:SignAssembly=$SIGN_ASSEMBLY /p:AssemblyOriginatorKeyFile=`winpath "$SIGNING_KEY"`
+MSBuild.exe $SOLUTION_FILE /p:SignAssembly=$SIGN_ASSEMBLY /p:AssemblyOriginatorKeyFile="`winpath "$SIGNING_KEY"`"
 
 
